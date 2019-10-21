@@ -2,23 +2,33 @@ package com.example.booksharing;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.booksharing.Http.HttpCallbackListener;
 import com.example.booksharing.Http.HttpRequest;
+import com.example.booksharing.bookView.Book;
+import com.example.booksharing.bookView.BookAdapter;
 import com.example.booksharing.database.book_GSON;
 import com.example.booksharing.database.book_info;
 import com.google.android.material.navigation.NavigationView;
@@ -30,15 +40,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity  {
     private static final String TAG="MainActivity";
     private DrawerLayout mDrawerLayout;
-    private Button sendRequest;
-
     private List<book_info> book_infoList;
+    private List<book_info> nList;
+    private List<book_info> pList;
+    private Book[] books;
+    private List<Book> bookList=new ArrayList<>();
+    private BookAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +89,29 @@ public class MainActivity extends AppCompatActivity  {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.users);
         }
+        pList=LitePal.select("pictureurl").find(book_info.class);
+        nList=LitePal.select("bookname").find(book_info.class);
+        Log.d(TAG, "onCreate: "+pList.get(0).toString());
+//        int nums=pList.size();
+//        for(int i=0;i<nums;i++) {
+//            books[i]=new Book(nList.get(i).toString(),pList.get(i).toString());
+//        }
+//        initBook();
+//        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+//        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+//        recyclerView.setLayoutManager(layoutManager);
+//        adapter=new BookAdapter(bookList);
+//        recyclerView.setAdapter(adapter);
     }
 
+    private void initBook(){
+        bookList.clear();
+        for(int i=0;i<50;i++){
+            Random random=new Random();
+            int index=random.nextInt(books.length);
+            bookList.add(books[index]);
+        }
+    }
     //扫码返回
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -195,4 +233,42 @@ public class MainActivity extends AppCompatActivity  {
         }
         return true;
     }
+
+//    private void gridView(){
+//        gridView = (GridView) findViewById(R.id.gridview);
+//        //初始化数据
+//        initData();
+//
+//        String[] from={"img","text"};
+//
+//        int[] to={R.id.img,R.id.text};
+//
+//        adapter=new SimpleAdapter(this, dataList, R.layout.gridview_item, from, to);
+//
+//        gridView.setAdapter(adapter);
+//
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//                                    long arg3) {
+//                AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
+//                builder.setTitle("提示").setMessage(dataList.get(arg2).get("text").toString()).create().show();
+//            }
+//        });
+//    }
+//    void initData() {
+//        //图标
+//        int icno[] = { R.mipmap.decode,R.mipmap.delete,R.mipmap.gift,
+//                R.mipmap.friendgroup,R.mipmap.collection};
+//        //图标下的文字
+//        String name[]={"时钟","信号","宝箱","秒钟","大象"};
+//        dataList = new ArrayList<Map<String, Object>>();
+//        for (int i = 0; i <icno.length; i++) {
+//            Map<String, Object> map=new HashMap<String, Object>();
+//            map.put("img", icno[i]);
+//            map.put("text",name[i]);
+//            dataList.add(map);
+//        }
+//    }
+
 }
