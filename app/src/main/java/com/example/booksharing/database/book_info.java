@@ -1,17 +1,28 @@
 package com.example.booksharing.database;
 
-public class book_info {
-    private int isbn;
+import org.litepal.crud.LitePalSupport;
+
+public class book_info extends LitePalSupport {
+    private String isbn;
     private String bookname;
     private String author;
-    private double price;
+    private String price;
     private String publishing;
+    private String pictureurl;
 
-    public int getIsbn() {
+    public String getPictureurl() {
+        return pictureurl;
+    }
+
+    public void setPictureurl(String pictureurl) {
+        this.pictureurl = pictureurl;
+    }
+
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -31,11 +42,11 @@ public class book_info {
         this.author = author;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

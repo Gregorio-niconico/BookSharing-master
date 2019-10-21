@@ -48,14 +48,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(!username.isEmpty()) {
                     userInfo = LitePal.where("username=?", username)
                             .find(user_info.class);
-                    if (!userInfo.get(0).getPassword().isEmpty()) {
+                    if (!userInfo.isEmpty()) {
                         Log.d(TAG, userInfo.get(0).getPassword());
                         if(!pwd.isEmpty()) {
                             if (userInfo.get(0).getPassword().equals(pwd)) {
                                 cleanEditText();
                                 Snackbar.make(v,"登录成功！",Snackbar.LENGTH_SHORT).show();
-//                                Toast.makeText(this, "登录成功！", Toast.LENGTH_SHORT).show();
-
                                 Intent intent = new Intent("com.example.booksharing.mainactivity");
                                 startActivity(intent);
 

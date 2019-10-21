@@ -24,16 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp">
-
-        <Button
-            android:id="@+id/send_request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send Request" />
-        <com.example.booksharing.MyImageView
-            android:id="@+id/main_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

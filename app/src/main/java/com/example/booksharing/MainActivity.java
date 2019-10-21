@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.booksharing.Http.HttpCallbackListener;
 import com.example.booksharing.Http.HttpRequest;
 import com.example.booksharing.database.book_GSON;
+import com.example.booksharing.database.book_info;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -29,19 +30,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
 
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity  {
     private static final String TAG="MainActivity";
     private DrawerLayout mDrawerLayout;
     private Button sendRequest;
-    TextView responseText;
-    MyImageView mMyImageView;
+
+    private List<book_info> book_infoList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.activity_register);
         LitePal.getDatabase();
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,29 +72,8 @@ public class MainActivity extends AppCompatActivity  {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.users);
         }
-        sendRequest = findViewById(R.id.send_request);
-        mMyImageView=(MyImageView)findViewById(R.id.main_image);
     }
-//    @Override
-//    public void onClick(View view) {
-//        int id = view.getId();
-//        switch (id){
-//            case R.id.send_request:
-////                sendRequestWithOkHttp();
-//                HttpRequest httpRequest=new HttpRequest();
-//                httpRequest.sendHttpRequest(address, new HttpCallbackListener() {
-//                    @Override
-//                    public void onFinish(String response) {
-//                        Log.d(TAG, "onFinish: ");
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//
-//                    }
-//                });
-//        }
-//    }
+
     //扫码返回
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,33 +84,54 @@ public class MainActivity extends AppCompatActivity  {
             } else {
                 Toast.makeText(this, "扫描成功，条码值: " + result.getContents()
                         , Toast.LENGTH_LONG).show();
-                final  String url="https://isbn.szmesoft.com/isbn/query?isbn="+result.getContents();
-                HttpRequest httpRequest=new HttpRequest();
-                httpRequest.sendHttpRequest(url, new HttpCallbackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Log.d(TAG, "url"+response);
-                        parseJSONWithJSONObject(response);
-                    }
-                    @Override
-                    public void onError(Exception e) {
-                        Log.d(TAG, "onError: "+e);
-                    }
-                });
-
-
+                queryBook(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-//
-//    private  void parseJSONWithGSON(String jsonData){
-//        Gson gson=new Gson();
-//        book_GSON bookGson=gson.fromJson(jsonData,book_GSON.class);
-//        Log.d(TAG, "ISBN is "+bookGson.getISBN());
-//        Log.d(TAG, "Author is "+bookGson.getAuthor());
-//    }
+
+    //匹配数据库是否有已有书籍
+    private void queryBook(String isbn){
+        book_infoList=LitePal.where("isbn=?",isbn).find(book_info.class);
+        //若数据库已存在数据，直接调用
+        if(!book_infoList.isEmpty()){
+            String bookname=book_infoList.get(0).getBookname();
+            String ISBN=book_infoList.get(0).getIsbn();
+            String author=book_infoList.get(0).getAuthor();
+            String publishing=book_infoList.get(0).getPublishing();
+            String price=book_infoList.get(0).getPrice();
+            String photourl=book_infoList.get(0).getPictureurl();
+            Intent intent=new Intent(MainActivity.this,ScanResultActivity.class);
+            intent.putExtra("ISBN",ISBN);
+            intent.putExtra("author",author);
+            intent.putExtra("publishing",publishing);
+            intent.putExtra("price",price);
+            intent.putExtra("name",bookname);
+            intent.putExtra("photourl",photourl);
+            Log.d(TAG, "query: "+ISBN);
+            Log.d(TAG, "query: "+author);
+            Log.d(TAG, "query: "+publishing);
+            Log.d(TAG, "query: "+price);
+            startActivity(intent);
+        }else {
+            //若不存在去接口查询
+            final  String url="https://isbn.szmesoft.com/isbn/query?isbn="+isbn;
+            HttpRequest httpRequest=new HttpRequest();
+            httpRequest.sendHttpRequest(url, new HttpCallbackListener() {
+                @Override
+                public void onFinish(String response) {
+                    Log.d(TAG, "url"+response);
+                    parseJSONWithJSONObject(response);
+                }
+                @Override
+                public void onError(Exception e) {
+                    Log.d(TAG, "onError: "+e);
+                }
+            });
+        }
+    }
+
     //Json数据筛选
     private void parseJSONWithJSONObject(String jsonData){
         JSONObject jsonObject= null;

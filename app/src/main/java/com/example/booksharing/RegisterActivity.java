@@ -37,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         LitePal.getDatabase();
-        user_info u=new user_info();
         Button returnLogin=(Button)findViewById(R.id.return_login);
         edit_username = (EditText) findViewById(R.id.edit_username);
         edit_pwd = (EditText) findViewById(R.id.edit_pwd);
