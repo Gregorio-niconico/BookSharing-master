@@ -90,10 +90,11 @@ public class MainActivity extends AppCompatActivity  {
         }
         book_List=LitePal.select("pictureurl","bookname").find(book_info.class);
         int nums=book_List.size();
-        //初始化读者的
+        //添加书籍列表
         for(int i=0;i<nums;i++) {
             bookList.add(new Book(book_List.get(i).getBookname().toString(),book_List.get(i).getPictureurl().toString()));
         }
+        //RecyclerView用户显示列表中的书名以及图片地址
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity  {
             } else {
                 Toast.makeText(this, "扫描成功，条码值: " + result.getContents()
                         , Toast.LENGTH_LONG).show();
+                //查询ISBN
                 queryBook(result.getContents());
             }
         } else {
