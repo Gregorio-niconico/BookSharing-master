@@ -4,8 +4,8 @@ public class Book {
     private String name;
     private  String imageId;
     public Book(String name,String imageId){
-        this.imageId=imageId;
         this.name=name;
+        this.imageId=imageId;
     }
 
     public String getName() {

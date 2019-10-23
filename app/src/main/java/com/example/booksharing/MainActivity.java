@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity  {
     private static final String TAG="MainActivity";
     private DrawerLayout mDrawerLayout;
     private List<book_info> book_infoList;
-    private List<book_info> nList;
-    private List<book_info> pList;
-    private Book[] books;
+    private List<book_info> book_List;
+//    private ArrayList<Book> bookArrayList;
     private List<Book> bookList=new ArrayList<>();
     private BookAdapter adapter;
 
@@ -89,29 +88,21 @@ public class MainActivity extends AppCompatActivity  {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.users);
         }
-        pList=LitePal.select("pictureurl").find(book_info.class);
-        nList=LitePal.select("bookname").find(book_info.class);
-        Log.d(TAG, "onCreate: "+pList.get(0).toString());
-//        int nums=pList.size();
-//        for(int i=0;i<nums;i++) {
-//            books[i]=new Book(nList.get(i).toString(),pList.get(i).toString());
-//        }
-//        initBook();
-//        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-//        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
-//        recyclerView.setLayoutManager(layoutManager);
-//        adapter=new BookAdapter(bookList);
-//        recyclerView.setAdapter(adapter);
+        book_List=LitePal.select("pictureurl","bookname").find(book_info.class);
+        int nums=book_List.size();
+        //添加书籍列表
+        for(int i=0;i<nums;i++) {
+            bookList.add(new Book(book_List.get(i).getBookname().toString(),book_List.get(i).getPictureurl().toString()));
+        }
+        //RecyclerView用户显示列表中的书名以及图片地址
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new BookAdapter(bookList);
+        recyclerView.setAdapter(adapter);
     }
 
-    private void initBook(){
-        bookList.clear();
-        for(int i=0;i<50;i++){
-            Random random=new Random();
-            int index=random.nextInt(books.length);
-            bookList.add(books[index]);
-        }
-    }
+
     //扫码返回
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -122,6 +113,7 @@ public class MainActivity extends AppCompatActivity  {
             } else {
                 Toast.makeText(this, "扫描成功，条码值: " + result.getContents()
                         , Toast.LENGTH_LONG).show();
+                //查询ISBN
                 queryBook(result.getContents());
             }
         } else {
