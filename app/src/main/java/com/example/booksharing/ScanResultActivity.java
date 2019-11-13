@@ -77,8 +77,8 @@ public class ScanResultActivity extends AppCompatActivity implements View.OnClic
                     Log.d(TAG, "书籍已存在~");
                     Toast.makeText(this, "图书已存在~", Toast.LENGTH_SHORT).show();
                 }
-                Intent mitent=new Intent(ScanResultActivity.this,MainActivity.class);
-                startActivity(mitent);
+                Intent intent1=new Intent(ScanResultActivity.this,MainActivity.class);
+                startActivity(intent1);
                 break;
             default:
                 break;

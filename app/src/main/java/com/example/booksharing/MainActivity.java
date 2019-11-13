@@ -60,13 +60,15 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //获取数据库
         LitePal.getDatabase();
+        //加载toolbar
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navigationView=(NavigationView)findViewById(R.id.nav_view);
         ActionBar actionBar=getSupportActionBar();
-        navigationView.setCheckedItem(R.id.nav_collection);
+        navigationView.setCheckedItem(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -77,8 +79,18 @@ public class MainActivity extends AppCompatActivity  {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId()==R.id.nav_decode){
-                    onScanBarcode(menuItem);
+//                if(menuItem.getItemId()==R.id.nav_decode){
+//                    onScanBarcode(menuItem);
+//                }
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_decode:
+                        onScanBarcode(menuItem);
+                        break;
+                    case R.id.nav_friend:
+                        Intent intent2=new Intent(MainActivity.this,FriendsActivity.class);
+                        startActivity(intent2);
+                        Log.d(TAG, "onNavigationItemSelected: "+"friend");
+                        break;
                 }
                 return true;
 
@@ -92,7 +104,8 @@ public class MainActivity extends AppCompatActivity  {
         int nums=book_List.size();
         //添加书籍列表
         for(int i=0;i<nums;i++) {
-            bookList.add(new Book(book_List.get(i).getBookname().toString(),book_List.get(i).getPictureurl().toString()));
+            bookList.add(new Book(book_List.get(i).getBookname().toString(),
+                    book_List.get(i).getPictureurl().toString()));
         }
         //RecyclerView用户显示列表中的书名以及图片地址
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
@@ -225,42 +238,5 @@ public class MainActivity extends AppCompatActivity  {
         }
         return true;
     }
-
-//    private void gridView(){
-//        gridView = (GridView) findViewById(R.id.gridview);
-//        //初始化数据
-//        initData();
-//
-//        String[] from={"img","text"};
-//
-//        int[] to={R.id.img,R.id.text};
-//
-//        adapter=new SimpleAdapter(this, dataList, R.layout.gridview_item, from, to);
-//
-//        gridView.setAdapter(adapter);
-//
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//                                    long arg3) {
-//                AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
-//                builder.setTitle("提示").setMessage(dataList.get(arg2).get("text").toString()).create().show();
-//            }
-//        });
-//    }
-//    void initData() {
-//        //图标
-//        int icno[] = { R.mipmap.decode,R.mipmap.delete,R.mipmap.gift,
-//                R.mipmap.friendgroup,R.mipmap.collection};
-//        //图标下的文字
-//        String name[]={"时钟","信号","宝箱","秒钟","大象"};
-//        dataList = new ArrayList<Map<String, Object>>();
-//        for (int i = 0; i <icno.length; i++) {
-//            Map<String, Object> map=new HashMap<String, Object>();
-//            map.put("img", icno[i]);
-//            map.put("text",name[i]);
-//            dataList.add(map);
-//        }
-//    }
 
 }

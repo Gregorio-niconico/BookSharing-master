@@ -2,22 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_collection"
-            android:icon="@mipmap/collection"
-            android:title="Collection"/>
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/home"
+            android:title="Home"/>
+        <item
+            android:id="@+id/nav_friend"
+            android:icon="@mipmap/friendgroup"
+            android:title="Friends"/>
         <item
             android:id="@+id/nav_decode"
             android:icon="@mipmap/decode"
             android:title="Decode"/>
-        <item
-            android:id="@+id/nav_download"
-            android:icon="@mipmap/download"
-            android:title="Download"/>
-        <item
-            android:id="@+id/nav_gift"
-            android:icon="@mipmap/gift"
-            android:title="Gift"/>
-
-
     </group>
 </menu>

@@ -6,12 +6,12 @@
     android:id="@+id/homeIcon"
     android:icon="@mipmap/home"
     android:title="Home"
-    app:showAsAction="always" />
+    app:showAsAction="never" />
     <item
     android:id="@+id/delete"
     android:icon="@mipmap/delete"
     android:title="Delete"
-    app:showAsAction="always" />
+    app:showAsAction="never" />
     <item
     android:id="@+id/users"
     android:icon="@mipmap/users"
