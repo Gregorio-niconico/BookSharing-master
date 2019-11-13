@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@mipmap/bg1"
+    android:background="@drawable/bg2"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -21,19 +21,21 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textColor="#0000"
+
         >
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:text="用  户  名 :  " />
+            android:textStyle="bold"
+            android:text="用 户 名 : " />
         <EditText
             android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="60dp"
-
+            android:textStyle="bold"
             android:hint="输入你的用户名"
             />
     </LinearLayout>
@@ -49,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:textStyle="bold"
             android:text="设置密码:" />
         <EditText
             android:id="@+id/edit_pwd"
@@ -56,6 +59,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:layout_marginRight="60dp"
+            android:textStyle="bold"
             android:hint="输入你的密码"
             />
     </LinearLayout>
@@ -70,12 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:textStyle="bold"
             android:text="确认密码:" />
         <EditText
             android:id="@+id/edit_checkpwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="60dp"
+            android:textStyle="bold"
             android:hint="再次输入密码"
             android:inputType="textPassword" />
     </LinearLayout>
@@ -88,17 +94,26 @@
         android:layout_marginTop="40sp">
         <Button
             android:id="@+id/button_confirm"
+            android:background="@color/colorAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="#aa5"
+            android:shadowColor="@color/textColorPrimary"
             android:shadowRadius="10"
             android:shadowDx="5"
             android:shadowDy="5"
+            android:textColor="@color/textColorPrimary"
             android:text="确认" />
         <Button
             android:id="@+id/button_cancel"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:shadowColor="@color/textColorPrimary"
+            android:shadowRadius="10"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:textColor="@color/textColorPrimary"
             android:text="取消" />
     </LinearLayout>
 
