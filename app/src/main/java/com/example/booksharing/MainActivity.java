@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +77,15 @@ public class MainActivity extends AppCompatActivity  {
                 return true;
             }
         });
+        View headview=navigationView.inflateHeaderView(R.layout.nav_header);
+        ImageView head_iv= (ImageView) headview.findViewById(R.id.icon_image);
+        head_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -109,7 +119,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         //RecyclerView用户显示列表中的书名以及图片地址
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager=new GridLayoutManager(this,3);
         recyclerView.setLayoutManager(layoutManager);
         adapter=new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);

@@ -18,7 +18,7 @@
                     android:background="?attr/colorPrimary"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="书友"
+                    app:title="书架"
                     app:titleTextColor="#EDFFEC"/>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -36,7 +38,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/nav_menu"
-        app:headerLayout="@layout/nav_header"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

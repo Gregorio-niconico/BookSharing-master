@@ -30,29 +30,46 @@
             android:src="@mipmap/header"
             android:layout_marginTop="150dp"
             android:layout_centerHorizontal="true"/>
-        <TextView
-            android:id="@+id/mail"
+        <LinearLayout
+            android:id="@+id/email_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/icon_image"
-            android:layout_centerInParent="true"
-            android:text="E-mail：Gregorio_o@163.com"
-            android:textColor="#000"
-            android:textSize="16sp"
-            />
-        <TextView
-            android:id="@+id/username"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/new_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail："
+                android:textColor="#000"
+                android:textSize="16sp"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入你的新邮箱"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/mail"
-            android:layout_centerInParent="true"
-            android:text="昵称：Gregorio"
-            android:textColor="#000"
-            android:textSize="16sp" />
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/new_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称："
+                android:textColor="#000"
+                android:textSize="16sp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入你的新昵称"/>
+        </LinearLayout>
         <Button
-            android:id="@+id/modify_button"
+            android:id="@+id/confirm_modify"
             android:background="@color/colorAccent"
             android:padding="5dp"
             android:layout_width="wrap_content"
@@ -61,6 +78,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:textColor="@color/textColorPrimary"
-            android:text="修改个人信息" />
+            android:text="确认" />
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

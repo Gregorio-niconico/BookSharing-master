@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyInfoActivity"></activity>
+        <activity android:name=".ModifyInfoActivity"></activity>
+        <activity android:name=".MyInfoActivity" />
         <activity android:name=".FriendsActivity" />
         <activity android:name=".ScanResultActivity" />
         <activity
