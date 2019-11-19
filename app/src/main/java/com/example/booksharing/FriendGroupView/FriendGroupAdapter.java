@@ -1,4 +1,4 @@
-package com.example.booksharing.FriendView;
+package com.example.booksharing.FriendGroupView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,21 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.booksharing.FriendView.Friend;
 import com.example.booksharing.R;
 
 import java.util.List;
 
-public class FriendAdapter extends ArrayAdapter<Friend> {
+public class FriendGroupAdapter extends ArrayAdapter<FriendGroup> {
     private int resourceId;
-    public FriendAdapter(Context context, int textViewRresourceId, List<Friend> objects){
+    public FriendGroupAdapter(Context context, int textViewRresourceId, List<FriendGroup> objects){
         super(context,textViewRresourceId,objects);
         resourceId=textViewRresourceId;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //获取当前项的Friend 实例
-        Friend friends=getItem(position);
+        //获取当前项的FriendGroup实例
+        FriendGroup friendGroup=getItem(position);
         //View view= LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
         View view;
         if(convertView==null){
@@ -31,10 +32,10 @@ public class FriendAdapter extends ArrayAdapter<Friend> {
         }else{
             view=convertView;//convertView参数用于缓存加载好的布局以便于重用，提高运行效率
         }
-        ImageView headImage=(ImageView)view.findViewById(R.id.img_name);
-        TextView friendName=(TextView)view.findViewById(R.id.friend_name);
-        headImage.setImageResource(friends.getHeadPic());
-        friendName.setText(friends.getName());
+        ImageView headPic=(ImageView)view.findViewById(R.id.img_name);
+        TextView groupName=(TextView)view.findViewById(R.id.friendgroup_name);
+        headPic.setImageResource(friendGroup.getHeadPic());
+        groupName.setText(friendGroup.getFriendGroupName());
         return view;
 
     }

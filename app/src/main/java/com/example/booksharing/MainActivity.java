@@ -2,7 +2,6 @@ package com.example.booksharing;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,29 +10,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.booksharing.Http.HttpCallbackListener;
 import com.example.booksharing.Http.HttpRequest;
 import com.example.booksharing.bookView.Book;
 import com.example.booksharing.bookView.BookAdapter;
-import com.example.booksharing.database.book_GSON;
 import com.example.booksharing.database.book_info;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -42,10 +32,7 @@ import org.json.JSONObject;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -86,6 +73,8 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
+        //侧边栏的点击事件
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -93,12 +82,16 @@ public class MainActivity extends AppCompatActivity  {
 //                    onScanBarcode(menuItem);
 //                }
                 switch (menuItem.getItemId()) {
-                    case R.id.nav_decode:
-                        onScanBarcode(menuItem);
+//                    case R.id.nav_decode:
+//                        onScanBarcode(menuItem);
+//                        break;
+                    case R.id.nav_friendgroup:
+                        Intent intentFg=new Intent(MainActivity.this, FriendGroupActivity.class);
+                        startActivity(intentFg);
                         break;
                     case R.id.nav_friend:
-                        Intent intent2=new Intent(MainActivity.this,FriendsActivity.class);
-                        startActivity(intent2);
+                        Intent intentF=new Intent(MainActivity.this,FriendsActivity.class);
+                        startActivity(intentF);
                         Log.d(TAG, "onNavigationItemSelected: "+"friend");
                         break;
                 }
@@ -110,6 +103,7 @@ public class MainActivity extends AppCompatActivity  {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.users);
         }
+        //查找书籍
         book_List=LitePal.select("pictureurl","bookname").find(book_info.class);
         int nums=book_List.size();
         //添加书籍列表
@@ -215,7 +209,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     //条形码扫描
-    public void onScanBarcode(MenuItem menuItem){
+    public void onScanBarcode(){
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
         integrator.setPrompt("扫描条形码");
@@ -235,11 +229,9 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.homeIcon:
-                Toast.makeText(this,"This is Home Button",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.delete:
-                Toast.makeText(this,"This is Home Button",Toast.LENGTH_SHORT).show();
+            //扫一扫按钮点击事件
+            case R.id.scan:
+                onScanBarcode();
                 break;
             //HomeAsUp按钮默认值都是android.R.id.home
             case android.R.id.home:

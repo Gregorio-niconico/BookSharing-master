@@ -2,6 +2,7 @@ package com.example.booksharing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,13 +32,15 @@ public class FriendsActivity extends AppCompatActivity {
                 Friend friend=friendList.get(position);
                 Toast.makeText(FriendsActivity.this,
                         friend.getName(),Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(FriendsActivity.this,FriendInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void initFriends(){
         for(int i=0;i<10;i++){
-            Friend me=new Friend("Gregorio",R.mipmap.gift);
+            Friend me=new Friend("Gregorio"+i,R.mipmap.gift);
             friendList.add(me);
         }
     }

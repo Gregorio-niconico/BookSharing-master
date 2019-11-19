@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-    android:id="@+id/homeIcon"
-    android:icon="@mipmap/home"
-    android:title="Home"
-    app:showAsAction="never" />
-    <item
-    android:id="@+id/delete"
-    android:icon="@mipmap/delete"
-    android:title="Delete"
-    app:showAsAction="never" />
-    <item
-    android:id="@+id/users"
-    android:icon="@mipmap/users"
-    android:title="Users"
-    app:showAsAction="never" />
-
+    android:id="@+id/scan"
+    android:icon="@mipmap/decode"
+    android:title="扫一扫"
+    app:showAsAction="always" />
 
 </menu>
