@@ -3,6 +3,7 @@ package com.example.booksharing;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -35,10 +36,13 @@ public class FriendGroupActivity extends AppCompatActivity {
                 FriendGroup friendGroup=friendGroups.get(position);
                 Toast.makeText(FriendGroupActivity.this,
                         friendGroup.getFriendGroupName(),Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(FriendGroupActivity.this,GroupInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
 
+    //在initFriendGroup中执行好友圈的初始化
     private void initFriendGroup(){
         for(int i=0;i<10;i++){
             FriendGroup fg=new FriendGroup("圈子"+i,R.mipmap.gift);

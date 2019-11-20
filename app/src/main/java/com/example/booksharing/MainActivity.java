@@ -228,6 +228,14 @@ public class MainActivity extends AppCompatActivity  {
             case R.id.scan:
                 onScanBarcode();
                 break;
+            case R.id.add_friend:
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.add_group:
+                Intent intent1=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent1);
+                break;
             //HomeAsUp按钮默认值都是android.R.id.home
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);

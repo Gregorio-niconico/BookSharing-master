@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GroupInfoActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".GroupInfoActivity" />
         <activity android:name=".BookInfoActivity">
             <intent-filter>
                 <action android:name="com.example.booksharing.bookInfo" />

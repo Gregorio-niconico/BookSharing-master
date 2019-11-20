@@ -38,6 +38,7 @@ public class FriendsActivity extends AppCompatActivity {
         });
     }
 
+    //在initFriends中执行好友列表初始化
     private void initFriends(){
         for(int i=0;i<10;i++){
             Friend me=new Friend("Gregorio"+i,R.mipmap.gift);

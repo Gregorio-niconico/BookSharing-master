@@ -23,6 +23,8 @@ import com.example.booksharing.R;
 import org.litepal.LitePal;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText edit_username;
@@ -69,7 +71,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                  u.setPassword(pwd);
                                  u.save();
                                  cleanEditText();
-                                 Toast.makeText(this, "注册成功！:)", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(this, "注册成功！即将自动回到登录界面 :)", Toast.LENGTH_SHORT).show();
+                                 //设置注册成功后1秒自动返回登录界面
+                                 TimerTask task=new TimerTask() {
+                                     @Override
+                                     public void run() {
+                                         Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                         startActivity(intent);
+                                     }
+                                 };
+                                 Timer timer=new Timer();
+                                 timer.schedule(task,1000);
                              }
                          }else{
                              cleanEditText();
