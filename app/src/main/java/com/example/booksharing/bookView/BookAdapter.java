@@ -60,24 +60,27 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             public void onClick(View v) {
                 int position=holder.getAdapterPosition();
                 Book book=mBook.get(position);
-//                LitePal.getDatabase();
-//                book_infoList= LitePal.where("name=?",book.getName()).find(book_info.class);
-//                    String bookname=book_infoList.get(0).getBookname();
-//                    String ISBN=book_infoList.get(0).getIsbn();
-//                    String author=book_infoList.get(0).getAuthor();
-//                    String publishing=book_infoList.get(0).getPublishing();
-//                    String price=book_infoList.get(0).getPrice();
-//                    String photourl=book_infoList.get(0).getPictureurl();
-                    Intent intent=new Intent(mContext, BookInfoActivity.class);
-//                    intent.putExtra("ISBN",ISBN);
-//                    intent.putExtra("author",author);
-//                    intent.putExtra("publishing",publishing);
-//                    intent.putExtra("price",price);
-//                    intent.putExtra("name",bookname);
-//                    intent.putExtra("photourl",photourl);
-//                Log.d(TAG, "ISBN:"+ISBN);
-//                Log.d(TAG, "name:"+bookname);
-                    mContext.startActivity(intent);
+                LitePal.getDatabase();
+                Log.d(TAG, "onClick: "+book.getName());
+                book_infoList= LitePal.where("bookname=?",book.getName()).find(book_info.class);
+                Log.d(TAG, "onClick: "+book_infoList);
+                String bookname=book_infoList.get(0).getBookname();
+                String ISBN=book_infoList.get(0).getIsbn();
+                String author=book_infoList.get(0).getAuthor();
+                String publishing=book_infoList.get(0).getPublishing();
+                String price=book_infoList.get(0).getPrice();
+                String photourl=book_infoList.get(0).getPictureurl();
+                Intent intent=new Intent(mContext, BookInfoActivity.class);
+                intent.putExtra("bookname",book.getName());
+                intent.putExtra("ISBN",ISBN);
+                intent.putExtra("author",author);
+                intent.putExtra("publishing",publishing);
+                intent.putExtra("price",price);
+                intent.putExtra("name",bookname);
+                intent.putExtra("photourl",photourl);
+                Log.d(TAG, "ISBN:"+ISBN);
+                Log.d(TAG, "name:"+bookname);
+                mContext.startActivity(intent);
             }
         });
 

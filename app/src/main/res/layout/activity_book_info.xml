@@ -17,7 +17,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="#EDFFEC"
-            app:title="扫描结果"/>
+            app:title="书籍信息"/>
     </FrameLayout>
     <LinearLayout
         android:orientation="vertical"

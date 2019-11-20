@@ -7,14 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.booksharing.database.book_info;
-
-import org.litepal.LitePal;
-
 import java.util.List;
-
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class BookInfoActivity extends AppCompatActivity {
@@ -30,17 +25,17 @@ public class BookInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_info);
-        LitePal.getDatabase();
+//        LitePal.getDatabase();
         BookName = (TextView) findViewById(R.id.text_bookname);
         ISBN = (TextView) findViewById(R.id.text_isbn);
         Author = (TextView) findViewById(R.id.text_author);
         Publishing = (TextView) findViewById(R.id.text_publishing);
         Price = (TextView) findViewById(R.id.text_price);
         myImageView = (MyImageView) findViewById(R.id.image);
-//        showResult();
+        showResult();
 
     }
-    //显示扫描结果
+    //显示书籍详情结果
     public void showResult() {
         //开启子线程做UI操作
         runOnUiThread(new Runnable() {

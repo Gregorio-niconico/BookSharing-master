@@ -12,10 +12,7 @@
         <item
             android:id="@+id/nav_friendgroup"
             android:icon="@mipmap/friendgroup"
-            android:title="朋友圈"/>
-        <item
-            android:id="@+id/nav_decode"
-            android:icon="@mipmap/decode"
-            android:title="Decode"/>
+            android:title="书圈"/>
+
     </group>
 </menu>

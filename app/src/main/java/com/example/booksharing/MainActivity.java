@@ -78,13 +78,8 @@ public class MainActivity extends AppCompatActivity  {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                if(menuItem.getItemId()==R.id.nav_decode){
-//                    onScanBarcode(menuItem);
-//                }
                 switch (menuItem.getItemId()) {
-//                    case R.id.nav_decode:
-//                        onScanBarcode(menuItem);
-//                        break;
+
                     case R.id.nav_friendgroup:
                         Intent intentFg=new Intent(MainActivity.this, FriendGroupActivity.class);
                         startActivity(intentFg);
