@@ -1,1 +1,7 @@
-# BookSharing-master
+# BookSharing
+书友APP，基于Android平台。
+1.实现登录注册功能（未连接服务器，仅可本地使用）；
+2.首页展示CardView形式的书籍列表；
+3.侧滑目录；
+4.图书条形码的识别，调用图书信息API；
+5.好友列表以及书籍详情。
